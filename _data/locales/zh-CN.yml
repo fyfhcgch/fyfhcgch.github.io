@@ -1,0 +1,85 @@
+# The localization data for Simplified Chinese (China)
+# 简体中文（中国）的本地化数据
+
+# The layout text of the theme
+# 主题的布局文本
+
+tabs:
+  # Tabs items in the sidebar
+  # 侧边栏的标签项
+  home: 首页
+  categories: 分类
+  tags: 标签
+  archives: 归档
+  about: 关于
+
+search_hint: 搜索
+
+panel:
+  lastmod: 最近更新
+  trending_tags: 热门标签
+  toc: 目录
+
+copyright:
+  # Shown at the bottom of the post
+  # 显示在文章底部
+  license:
+    template: 本文由作者按照 :LICENSE_NAME 进行授权
+    name: CC BY 4.0
+    link: https://creativecommons.org/licenses/by/4.0/
+
+  # Displayed in the footer
+  # 显示在页脚
+  brief: 保留部分权利。
+  verbose: >-
+    除非另有说明，本网站上的博客文章均由作者原创，
+    并遵循 CC BY 4.0 协议授权。
+
+# meta 字段已留空，用于删除页脚的 "本站采用 Jekyll 主题 Chirpy" 文本
+meta: ""
+
+not_found:
+  statment: 抱歉，我们放错了该 URL，或者它指向了不存在的内容。
+
+time:
+  # The format of date in the posts list and the posts' meta
+  # 文章列表和文章元数据中的日期格式
+  post:
+    long: "%Y年%m月%d日"
+    short: "%m月%d日"
+    archive_month: "%m月"
+
+  # The format of date in the copyright statement
+  # 版权声明中的日期格式
+  copyright:
+    prefix: "版权所有"
+    suffix: ""
+
+reading_time:
+  # The prompt text of reading time in the post meta
+  # 文章元数据中阅读时间的提示文本
+  prompt: 阅读时长
+  unit: 分钟
+
+accessibility:
+  # The prompt text of the link to the top of the page
+  # 返回页面顶部链接的提示文本
+  nav_top: 回到顶部
+  # The prompt text of the link to the bottom of the page
+  # 返回页面底部链接的提示文本
+  nav_bottom: 回到底部
+  # The text of the link to the copy button
+  # 复制按钮的文本
+  copy: 复制
+  # The text of the link to the search button
+  # 搜索按钮的文本
+  search: 搜索
+  # The text of the link to the light mode
+  # 浅色模式的文本
+  light: 浅色模式
+  # The text of the link to the dark mode
+  # 深色模式的文本
+  dark: 深色模式
+  # The text of the link to the auto mode
+  # 自动模式的文本
+  auto: 自动模式
