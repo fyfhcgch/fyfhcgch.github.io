@@ -1,7 +1,8 @@
 # Bundler cache
 .bundle
 vendor
-Gemfile.lock
+# Gemfile.lock 注释掉以确保GitHub Actions构建一致性
+# Gemfile.lock
 
 # Jekyll cache
 .jekyll-cache
