@@ -1024,7 +1024,7 @@ function SafeComponent({ userInput }) {
 
 // 危险的写法（需要特别注意）
 function DangerousComponent({ userInput }) {
-    return <div dangerouslySetInnerHTML={% raw %}{{ __html: userInput }}{% endraw %} />;
+    return <div dangerouslySetInnerHTML={{ __html: userInput }} />;
 }
 ```
 
