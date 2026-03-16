@@ -285,7 +285,6 @@ Jinja2是Python最流行的模板引擎，被Flask、Django（可选）等框架
 {{ [].__class__ }}           {# <class 'list'> #}
 {{ {}.__class__ }}           {# <class 'dict'> #}
 {{ ().__class__ }}           {# <class 'tuple'> #}
-```
 
 {# 步骤2：获取基类 #}
 {{ ''.__class__.__base__ }}       {# <class 'object'> #}
