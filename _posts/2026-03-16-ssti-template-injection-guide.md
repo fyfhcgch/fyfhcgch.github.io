@@ -380,6 +380,7 @@ template = env.from_string('{{ user_input }}')  # 受限执行
 
 **4. 使用字符串拼接绕过关键词过滤：**
 
+{% raw %}
 ```jinja2
 {# 如果__class__被过滤 #}
 {{()['__cl'+'ass__']}}
@@ -394,6 +395,7 @@ template = env.from_string('{{ user_input }}')  # 受限执行
 {# 使用replace #}
 {{()|attr('__clXss__'|replace('X','a'))}}
 ```
+{% endraw %}
 
 **5. 使用Unicode编码绕过：**
 
