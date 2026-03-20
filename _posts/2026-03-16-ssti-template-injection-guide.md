@@ -828,7 +828,7 @@ ERB是Ruby的默认模板引擎。
 ```html
 <div>{$what}</div>
 <p>Welcome, {{username}}</p>
-<div>{%$a%}</div>
+<div>{% raw %}{%$a%}{% endraw %}</div>
 ```
 
 **HTTP响应头特征：**
