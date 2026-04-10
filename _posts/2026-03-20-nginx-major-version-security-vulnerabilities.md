@@ -1645,7 +1645,7 @@ securityContext:
 
 1. [CVE-2017-7529 Technical Analysis](https://blog.detectify.com/2017/10/03/cve-2017-7529-nginx-integer-overflow-vulnerability/)
 2. [Nginx HTTP/2 Vulnerabilities Analysis](https://github.com/google/security-research/security/advisories/GHSA-qr6w-c5mgjmj6)
-3. [HTTP/2 Protocol Security](https://http2 Explained/)
+3. [HTTP/2 Protocol Security](https://http2-explained.haxx.se/)
 
 ### 工具与资源
 
