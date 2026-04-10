@@ -226,3 +226,6 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
+    year: '/:year/'
+    month: '/:year/:month/'
+    day: '/:year/:month/:day/'
