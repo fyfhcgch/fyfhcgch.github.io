@@ -13,11 +13,11 @@ description: 一道PHP反序列化CTF题的完整解题思路——从重复数�
 - [题目概述](#题目概述)
 - [题目代码还原](#题目代码还原)
 - [攻击链总览](#攻击链总览)
-- [难点一：析构函数输出看不见 → 重复数组键触发 Fast-Destruct](#难点一析构函数输出看不见--重复数组键触发-fast-destruct)
-- [难点二：`$username == "admin"` → 布尔值 true 绕过](#难点二username--admin--布尔值-true-绕过)
-- [难点三：过滤器禁止 `Access":` → `__PHP_Incomplete_Class` 绕过](#难点三过滤器禁止-access-__php_incomplete_class-绕过)
-- [难点四：`exec()` 中的两个条件 → 序列化往返](#难点四exec-中的两个条件--序列化往返)
-- [难点五：让 `getToken()` 调用 `getFlag()` → 静态方法调用数组](#难点五让-gettoken-调用-getflag--静态方法调用数组)
+- [难点一：析构函数输出看不见 - 重复数组键触发 Fast-Destruct](#难点一析构函数输出看不见--重复数组键触发-fast-destruct)
+- [难点二：username 等于 admin - 布尔值 true 绕过](#难点二username-等于-admin--布尔值-true-绕过)
+- [难点三：过滤器禁止 Access 冒号引号 - __PHP_Incomplete_Class 绕过](#难点三过滤器禁止-access-冒号引号-__php_incomplete_class-绕过)
+- [难点四：exec 中的两个条件 - 序列化往返](#难点四exec-中的两个条件--序列化往返)
+- [难点五：让 getToken 调用 getFlag - 静态方法调用数组](#难点五让-gettoken-调用-getflag--静态方法调用数组)
 - [完整 Payload 构造](#完整-payload-构造)
 - [攻击脚本](#攻击脚本)
 - [五大技巧速查卡](#五大技巧速查卡)
@@ -141,7 +141,7 @@ throw new Exception("nonono!!!");
 
 ---
 
-## 难点一：析构函数输出看不见 → 重复数组键触发 Fast-Destruct
+## 难点一：析构函数输出看不见 - 重复数组键触发 Fast-Destruct
 
 ### 问题在哪
 
@@ -198,7 +198,7 @@ a:2:{i:0;<User对象>;i:0;b:0;}
 
 ---
 
-## 难点二：`$username == "admin"` → 布尔值 true 绕过
+## 难点二：username 等于 admin - 布尔值 true 绕过
 
 ### 问题在哪
 
@@ -254,7 +254,7 @@ s:8:"username";s:5:"admin";    // 包含 "admin"，可能被过滤
 
 ---
 
-## 难点三：过滤器禁止 `Access":` → `__PHP_Incomplete_Class` 绕过
+## 难点三：过滤器禁止 Access 冒号引号 - __PHP_Incomplete_Class 绕过
 
 ### 问题在哪
 
@@ -321,7 +321,7 @@ PHP 反序列化时发现类 "A" 不存在
 
 ---
 
-## 难点四：`exec()` 中的两个条件 → 序列化往返
+## 难点四：exec 中的两个条件 - 序列化往返
 
 ### 问题在哪
 
@@ -366,7 +366,7 @@ if ($ser != $this->value && $instance instanceof Access) {
 
 ---
 
-## 难点五：让 `getToken()` 调用 `getFlag()` → 静态方法调用数组
+## 难点五：让 getToken 调用 getFlag - 静态方法调用数组
 
 ### 问题在哪
 
