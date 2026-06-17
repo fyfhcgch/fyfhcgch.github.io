@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Java反序列化漏洞完全指南：从原理到11大利用链详解（新手向）"
-date: 2026-06-16 10:00:00 +0800
+date: 2026-06-17 10:00:00 +0800
 categories: [网络安全, Java安全]
 tags: [Java反序列化, CommonsBeanutils, Shiro, RMI, JNDI, Fastjson, Jackson, Rome, 二次反序列化, JDBC, Hessian, SnakeYAML, 漏洞分析, 安全防御, 渗透测试]
 author: Security Researcher
