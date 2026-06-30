@@ -8,15 +8,11 @@ order: 4
 
 你好！我是一名热爱技术的开发者，喜欢探索各种新技术和解决方案。
 
-### 技术栈
-- **前端**：HTML/CSS/JavaScript, React, Vue
-- **后端**：Python, Node.js
-- **工具**：Git, Docker, GitHub
 
 ### 兴趣爱好
 - 编程和技术学习
-- 阅读和写作
-- 旅行和摄影
+- 阅读
+- 近代史
 
 ### 联系方式
 - GitHub：[fyfhcgch](https://github.com/fyfhcgch)
@@ -25,9 +21,8 @@ order: 4
 
 ## 关于这个博客
 
-这个博客使用 Jekyll + Chirpy 主题搭建，主要用于分享：
+这个博客使用 Jekyll + Chirpy 主题搭建，主要用于：
 - 技术学习笔记
-- 开发经验分享
-- 生活感悟
+- 备忘录
 
-希望通过这个平台与大家交流学习，共同进步！
+
